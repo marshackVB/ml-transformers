@@ -7,7 +7,7 @@ jobs:
       - image: circleci/python:3.7.4
         environment:
           PIPENV_VENV_IN_PROJECT: true
-          
+
     steps:
      - checkout
      - run:
@@ -17,7 +17,6 @@ jobs:
                   pipenv run python -m mypy ./src --config-file ./mypy.ini 
           name: Type Checking
                   
-    steps:
       - run:
           command: |
                   mkdir ./tests/results
