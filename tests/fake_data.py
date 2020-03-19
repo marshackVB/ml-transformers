@@ -2,7 +2,7 @@ import typing as t
 import numpy as np
 
 
-def random_categorical(categoricals: t.List[str], length: str) -> t.List[str]:
+def random_categorical(categoricals: t.List[str], length: int) -> t.List[str]:
     """Returns a list of randomly chosen elements from a list of strings
     (categorical values) of length, length
     """
