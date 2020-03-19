@@ -7,21 +7,19 @@ jobs:
       - image: circleci/python:3.7.4
         environment:
           PIPENV_VENV_IN_PROJECT: true
-
     steps:
      - checkout
      - run:
+          name: Type Checking
           command: |
                   pipenv install --dev
                   pipenv run python -m mypy ./tests --config-file ./mypy.ini 
-                  pipenv run python -m mypy ./src --config-file ./mypy.ini 
-          name: Type Checking
-                  
+                  pipenv run python -m mypy ./src --config-file ./mypy.ini  
       - run:
+          name: Unit Tests
           command: |
                   mkdir ./tests/results
-                  pipenv run python -m pytest --junitxml=./tests/results/results.xml
-          name: Unit Tests
+                  pipenv run python -m pytest --junitxml=./tests/results/results.xml  
       - store_test_results: # Upload test results for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
           path: ./tests/
       - store_artifacts: # Upload test summary for display in Artifacts: https://circleci.com/docs/2.0/artifacts/
