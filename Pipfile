@@ -4,9 +4,12 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
-pytest = "==5.4.1"
-mypy   = "==0.770" 
+pytest         = "==5.4.1"
+mypy           = "==0.770" 
 
 [packages]
-pandas       = "==1.0.3"
-scikit-learn = "==0.22.2"
+pandas         = "==1.0.3"
+scikit-learn   = "==0.22.2"
+
+[requires]
+python_version = "3.7.4"
