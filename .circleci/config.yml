@@ -8,8 +8,8 @@ jobs:
         environment:
           PIPENV_VENV_IN_PROJECT: true
     steps:
-     - checkout
-     - run:
+      - checkout
+      - run:
           name: Type Checking
           command: |
                   pipenv install --dev
