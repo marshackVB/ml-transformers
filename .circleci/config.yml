@@ -1,12 +1,15 @@
 version: 2.1
 
+defaults: &defaults
+  working_directory: ~/transformers
+  docker: 
+    - image: circleci/python:3.7.4
+      environment:
+        PIPENV_VENV_IN_PROJECT: true
+  
 jobs:
-  build-and-test:
-    working_directory: ~/transformers
-    docker:
-      - image: circleci/python:3.7.4
-        environment:
-          PIPENV_VENV_IN_PROJECT: true
+  test:
+    <<: *defaults
     steps:
       - checkout
       - run:
@@ -21,12 +24,29 @@ jobs:
                   mkdir ./tests/results
                   pipenv run python -m pytest --junitxml=./tests/results/results.xml
       - store_test_results: # Upload test results for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
-          path: ./tests/
+          path: ../
       - store_artifacts: # Upload test summary for display in Artifacts: https://circleci.com/docs/2.0/artifacts/
-          path: ./tests/
+          path: ../
           destination: tr1
+jobs:
+  build:
+  <<: *defaults
+    steps:
+      - checkout
+      - run:
+          name: Build Wheel
+          command: |
+            python3 setup.py bdist_wheel
+
 
 workflows:
   main:
     jobs:
-      - build-and-test
+      - test
+      - build:
+          requires:
+            - test
+          filters:
+            branches:
+              only:
+               - master
