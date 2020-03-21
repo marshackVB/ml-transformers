@@ -11,7 +11,7 @@ import pandas as pd
 from sklearn.pipeline import make_pipeline, FeatureUnion, Pipeline
 
 from fake_data import random_categorical, random_integer, random_float
-from src.general import (DataFrameSelector, NumpyConverter, GetDummies,
+from transformers.general import (DataFrameSelector, NumpyConverter, GetDummies,
                     CategoricalEncoder)
 
 

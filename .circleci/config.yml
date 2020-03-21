@@ -2,7 +2,7 @@ version: 2.1
 
 jobs:
   build-and-test:
-    working_directory: ~/transformers
+    working_directory: ~/.
     docker:
       - image: circleci/python:3.7.4
         environment:
@@ -14,7 +14,7 @@ jobs:
           command: |
                   pipenv install --dev --ignore-pipfile
                   pipenv run python -m mypy ./tests --config-file ./mypy.ini
-                  pipenv run python -m mypy ./src --config-file ./mypy.ini
+                  pipenv run python -m mypy ./transformers --config-file ./mypy.ini
       - run:
           name: Unit Tests
           command: |
