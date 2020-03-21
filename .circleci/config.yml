@@ -1,15 +1,12 @@
 version: 2.1
 
-defaults: &defaults
-  working_directory: ~/transformers
-  docker: 
-    - image: circleci/python:3.7.4
-      environment:
-        PIPENV_VENV_IN_PROJECT: true
-  
 jobs:
   test:
-    <<: *defaults
+    working_directory: ~/transformers
+    docker: 
+      - image: circleci/python:3.7.4
+        environment:
+          PIPENV_VENV_IN_PROJECT: true
     steps:
       - checkout
       - run:
@@ -31,7 +28,11 @@ jobs:
           
 jobs:
   build:
-    <<: *defaults
+    working_directory: ~/transformers
+    docker: 
+      - image: circleci/python:3.7.4
+        environment:
+          PIPENV_VENV_IN_PROJECT: true
     steps:
       - checkout
       - run:
