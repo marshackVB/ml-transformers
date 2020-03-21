@@ -26,7 +26,6 @@ jobs:
           path: ../
           destination: tr1
           
-jobs:
   build:
     working_directory: ~/transformers
     docker: 
