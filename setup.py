@@ -18,6 +18,6 @@ setuptools.setup(
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent"
     ],
-    install_requires = ["pandas", "sckikit-learn"],
+    install_requires = ["pandas", "scikit-learn"],
     python_requires =  ">=3.6"
 )
