@@ -28,6 +28,7 @@ jobs:
       - store_artifacts: # Upload test summary for display in Artifacts: https://circleci.com/docs/2.0/artifacts/
           path: ../
           destination: tr1
+          
 jobs:
   build:
   <<: *defaults
@@ -37,7 +38,6 @@ jobs:
           name: Build Wheel
           command: |
             python3 setup.py bdist_wheel
-
 
 workflows:
   main:
@@ -49,4 +49,4 @@ workflows:
           filters:
             branches:
               only:
-               - master
+                - master
