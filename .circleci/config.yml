@@ -31,9 +31,12 @@ jobs:
           PIPENV_VENV_IN_PROJECT: true
     steps:
       - checkout
+      - add_ssh_keys
       - run:
           name: Build Wheel
           command: |
+            git config credential.helper 'cache --timeout=120'
+            git conig user.email "email"
             pipenv run python setup.py bdist_wheel
             git add -A
             git commit -m 'Updated by CircleCI [ci skip]'
