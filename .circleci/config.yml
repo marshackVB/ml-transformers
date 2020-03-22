@@ -34,9 +34,9 @@ jobs:
       - run:
           name: Build Wheel
           command: |
-            python3 setup.py bdist_wheel
+            pipenv run python setup.py bdist_wheel
             git push add -A
-            git commit -m Updated by CircleCI [ci skip]
+            git commit -m 'Updated by CircleCI [ci skip]'
             git push origin master
 
 workflows:
