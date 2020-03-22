@@ -30,14 +30,16 @@ jobs:
         environment:
           PIPENV_VENV_IN_PROJECT: true
     steps:
-      - checkout
       - add_ssh_keys
       - run:
-          name: Build Wheel
+          name: Build wheel
+          command: |
+            pipenv run python3 setup.py bdist_wheel
+      - run:
+          name: Push wheel
           command: |
             git config user.email "carter.marshall@gmail.com"
             git config user.name "marshackVB"
-            pipenv run python setup.py bdist_wheel
             git add -A
             git commit -m 'Updated by CircleCI [ci skip]'
             git push -q origin master
