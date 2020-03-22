@@ -3,7 +3,7 @@ version: 2.1
 jobs:
   test:
     working_directory: ~/transformers
-    docker: 
+    docker:
       - image: circleci/python:3.7.4
         environment:
           PIPENV_VENV_IN_PROJECT: true
@@ -21,10 +21,7 @@ jobs:
                   mkdir ./tests/results
                   pipenv run python -m pytest --junitxml=./tests/results/results.xml
       - store_test_results: # Upload test results for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
-          path: ../
-      - store_artifacts: # Upload test summary for display in Artifacts: https://circleci.com/docs/2.0/artifacts/
-          path: ../
-          destination: tr1
+          path: ./tests
           
   build:
     working_directory: ~/transformers
@@ -38,6 +35,9 @@ jobs:
           name: Build Wheel
           command: |
             python3 setup.py bdist_wheel
+            git push add -A
+            git commit -m Updated by CircleCI [ci skip]
+            git push origin master
 
 workflows:
   main:
