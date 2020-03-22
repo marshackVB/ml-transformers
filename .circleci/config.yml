@@ -35,7 +35,7 @@ jobs:
           name: Build Wheel
           command: |
             pipenv run python setup.py bdist_wheel
-            git push add -A
+            git add -A
             git commit -m 'Updated by CircleCI [ci skip]'
             git push origin master
 
