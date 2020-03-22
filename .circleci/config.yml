@@ -41,6 +41,8 @@ jobs:
       - run:
           name: Push wheel
           command: |
+            git config user.email "carter.marshall@gmail.com"
+            git config user.name “marshackVB”
             git add -A
             git commit -m 'updated by CircleCI [ci skip]'
             git push -q origin master
