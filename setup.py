@@ -4,11 +4,11 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name = "mlc-ml-transformers",
+    name = "sklearn-transformers",
     version = "0.0.1",
     author = "Marshall Carter",
     author_email = "carter.marshall@gmail.com",
-    desciption = "custom scikit-learn transfomers",
+    desciption = "Custom scikit-learn transfomers",
     long_description = long_description,
     long_destricption_content_type = "text/markdown",
     url = "https://github.com/marshackVB/tranformers",
