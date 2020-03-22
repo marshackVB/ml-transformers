@@ -35,10 +35,12 @@ jobs:
       - run:
           name: Build Wheel
           command: |
+            git config user.email "carter.marshall@gmail.com"
+            git config user.name "marshackVB"
             pipenv run python setup.py bdist_wheel
             git add -A
             git commit -m 'Updated by CircleCI [ci skip]'
-            git push origin master
+            git push -q origin master
 
 workflows:
   main:
