@@ -31,7 +31,7 @@ jobs:
           PIPENV_VENV_IN_PROJECT: true
     steps:
       - checkout
-      - add_ssh_keys
+      - add_ssh_keys:
           fingerprints:
             - "ef:33:92:19:50:52:0d:60:02:d5:05:fe:ee:d3:c4:68"
       - run:
