@@ -30,6 +30,7 @@ jobs:
         environment:
           PIPENV_VENV_IN_PROJECT: true
     steps:
+      - checkout
       - add_ssh_keys
       - run:
           name: Build wheel
