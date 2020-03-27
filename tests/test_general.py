@@ -8,11 +8,10 @@ import typing as t
 import pytest
 import numpy as np
 import pandas as pd
-from sklearn.pipeline import make_pipeline, FeatureUnion, Pipeline
+from sklearn.pipeline import make_pipeline
 
-from fake_data import random_categorical, random_integer, random_float
-from transformers.general import (DataFrameSelector, NumpyConverter, GetDummies,
-                    CategoricalEncoder)
+from transformers.utils import random_categorical, random_integer
+from transformers.general import DataFrameSelector
 
 
 def test_DataFrameSelector() -> None:
