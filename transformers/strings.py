@@ -3,6 +3,7 @@ A collection of string parsing and string similarity transformers
 """
 
 import re
+from typing import List
 from statistics import mean
 from sklearn.base import BaseEstimator, TransformerMixin
 import pandas as pd
@@ -12,18 +13,34 @@ from fuzzywuzzy import fuzz
 
 
 class TokenRemover(BaseEstimator, TransformerMixin):
-    """Given a list of tokens, remove all their instances from a string"""
 
-    def __init__(self, col_to_clean, tokens_to_remove):
-        self.col_to_clean = col_to_clean
+    def __init__(self, tokens_to_remove: List[str]) -> None:
+        """Given a list of tokens, remove all their instances from a string.
+        Afterward, convert all multi spaces to a single space and trim the 
+        string so there are no leading or trailing spaces. Tokens are treated 
+        as case insensitive when being removed.
+
+        Args: 
+            tokens_to_remove (List(str)): The list of tokens to remove from each string
+
+        Example:
+            tokens_to_remove = ['Corporate', 'Assoc']
+
+            ' Cicso  corporation' -> 'Cisco'
+            'Assoc of Homeowners  assoc ' -> 'of Hownowners'
+        
+        """
+
         self.tokens_to_remove = tokens_to_remove
 
 
     def remove_tokens(self, name):
+        "Replace tokens with empy space"
         for token in self.tokens_to_remove:
 
+            # Ensure token has space before, after, or before and after
             expression = "^{0}(?=\s)|(?<=\s){0}(?=\s)|(?<=\s){0}$".format(token)
-            p = re.compile(expression)
+            p = re.compile(expression, re.IGNORECASE)
             name = p.sub('', name)
             name = re.sub('[-\s]+', ' ', name)
 
@@ -34,15 +51,13 @@ class TokenRemover(BaseEstimator, TransformerMixin):
         return self
 
 
-    def transform(self, X):
+    def transform(self, X: pd.DataFrame) -> pd.DataFrame:
 
-        col_a = self.col_to_clean + "_a"
-        col_b = self.col_to_clean + "_b"
+        for column in X.columns:
 
-        new_col_name = self.col_to_clean + 'uncommon'
+            new_col_name = column + '_tk_removed'
 
-        X[new_col_name + "_a"] = X[col_a].apply(self.remove_tokens)
-        X[new_col_name + "_b"] = X[col_b].apply(self.remove_tokens)
+            X[new_col_name] = X[f'{column}'].apply(self.remove_tokens)
 
         return X
 
